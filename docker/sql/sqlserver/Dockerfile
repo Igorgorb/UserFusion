@@ -1,5 +1,5 @@
 # Choose ubuntu version
-FROM mcr.microsoft.com/mssql/server:2019-latest
+FROM mcr.microsoft.com/mssql/server:2022-latest
 
 USER root
 # Create app directory
@@ -27,5 +27,5 @@ EXPOSE 1433
 # Switch back to mssql user and run the entrypoint script
 USER mssql
 # Run Microsoft SQL Server and initialization script (at the same time)
-#CMD /bin/bash ./entrypoint.sh
-ENTRYPOINT ["./entrypoint.sh"]
+CMD /bin/bash ./entrypoint.sh
+# ENTRYPOINT ["./entrypoint.sh"]
