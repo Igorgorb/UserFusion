@@ -48,7 +48,7 @@ Java 17 is required.
 2. Then, build the artifacts:
     
     ```sh
-    ./gradlew clean build
+    gradlew clean build
     ```
 
 3. Next, build the Docker Compose with the obtained artifacts for the config server and service:
@@ -61,12 +61,12 @@ Java 17 is required.
 
 4. After building the container and starting all services, the service will be available at:
 
-[http://localhost:8078/users](http://localhost:8078/users)
+    [http://localhost:8078/users](http://localhost:8078/users)
 
 ### Configuration
 
 Database access settings for retrieving information are located in the file:
-`docker/configs/user-fusion-backend.yml` in the `data-sources` block:
+[docker/configs/user-fusion-backend.yml](./docker/configs/user-fusion-backend.yml) in the `data-sources` block:
 
 ```yaml
 data-sources:
@@ -113,7 +113,7 @@ The `docker/logs` folder is mounted in the container to save service logs.
 
 2. Configure data sources:
    Before building, edit the `application.yml` file:
-   `user-fusion-backend/src/main/resources/application.yml`
+   [user-fusion-backend/src/main/resources/application.yml](./user-fusion-backend/src/main/resources/application.yml)
    - Or configure the accessible Cloud Config Server and specify its URL and credentials if necessary in the block:
 
     ```yaml
@@ -129,7 +129,7 @@ The `docker/logs` folder is mounted in the container to save service logs.
 3. Then, build the artifacts:
 
     ```sh
-    ./gradlew clean build
+    gradlew clean build
     ```
 
 4. Run the service:
@@ -162,8 +162,8 @@ For this run option, logging occurs at:
 
 
 
-- [x] Write OpenApi specification is located in the file:
-  `user-fusion-spec-api\specification\1.0.0\api.yaml`
+- [x] The OpenApi specification has been written. The result is located in the file:
+  [user-fusion-spec-api\specification\1.0.0\api.yaml](./user-fusion-spec-api/specification/1.0.0/api.yaml)
 - [x] Create project with three modules: 
     - API
     - Backend
