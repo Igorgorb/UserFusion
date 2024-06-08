@@ -1,0 +1,12 @@
+server:
+   port: 8888
+spring:
+  application:
+    name: user-fusion-cloud-config-server
+  profiles:
+    active: native
+  cloud:
+     config:
+       server:
+           native:
+              searchLocations: file:///C:/JProj/Interview/UserFusion/user-fusion-cloud-config-server/src/main/resources/config/user-fusion-backend

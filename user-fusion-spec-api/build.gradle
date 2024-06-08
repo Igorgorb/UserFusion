@@ -1,0 +1,174 @@
+import org.openapitools.generator.gradle.plugin.tasks.GenerateTask
+
+plugins {
+    id 'java'
+    id 'java-library'
+    id 'org.springframework.boot' version '3.3.0'
+    id 'io.spring.dependency-management' version '1.1.5'
+    id "org.openapi.generator" version "7.1.0"
+}
+
+apply plugin: "com.diffplug.spotless"
+
+version = '1.0-SNAPSHOT'
+
+java {
+    sourceCompatibility = JavaVersion.VERSION_17
+    targetCompatibility = JavaVersion.VERSION_17
+}
+
+repositories {
+    mavenCentral()
+}
+
+ext {
+    versionOpenApiGradlePlugin = '7.4.0'
+    versionSpringDocOAPIUi = '1.7.0'
+    versionSwaggerAnotations = '2.2.22'
+    versionGoogleJavaFormat = '1.22.0'
+}
+
+dependencies {
+
+    implementation platform("org.springframework.boot:spring-boot-dependencies:${versionSpringBootDepend}") // 3.2.5")
+
+    implementation 'org.springframework.boot:spring-boot-starter'
+    implementation 'org.springframework.boot:spring-boot-starter-web'
+    implementation "org.springdoc:springdoc-openapi-starter-webmvc-ui:${versionOpenApiWebMvcUI}" //:2.5.0'
+//    implementation "org.springdoc:springdoc-openapi-ui:${versionSpringDocOAPIUi}" //  1.7.0"
+    implementation "io.swagger.core.v3:swagger-annotations:${versionSwaggerAnotations}" //  2.2.22"
+    implementation "org.openapitools:openapi-generator-gradle-plugin:${versionOpenApiGradlePlugin}" //  7.4.0"
+    implementation 'jakarta.validation:jakarta.validation-api'
+    implementation 'jakarta.annotation:jakarta.annotation-api'
+//    implementation "com.google.googlejavaformat:google-java-format:$versionGoogleJavaFormat"
+
+    compileOnly 'org.projectlombok:lombok'
+    annotationProcessor 'org.projectlombok:lombok'
+
+    testImplementation platform('org.junit:junit-bom')
+
+    testImplementation 'org.springframework.boot:spring-boot-starter-test'
+    testImplementation 'io.rest-assured:rest-assured'
+    testImplementation 'org.junit.jupiter:junit-jupiter'
+    testImplementation 'org.hamcrest:hamcrest-all:1.3'
+    testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
+
+    testCompileOnly 'org.projectlombok:lombok'
+    testAnnotationProcessor 'org.projectlombok:lombok'
+
+    configurations {
+        implemenation {
+            exclude group: 'org.slf4j'
+        }
+    }
+
+}
+
+checkstyle {
+    checkstyleMain.enabled = false
+    checkstyleTest.enabled = false
+}
+
+//tasks.register("spotless") {
+//spotless {
+////    dependsOn(task("assemble"))
+//    java {
+//        removeUnusedImports()
+////        googleJavaFormat('1.22.0').aosp()
+////        indentWithTabs(2)
+////        indentWithSpaces(4)
+//        endWithNewline()
+//    }
+//}
+
+test {
+//    useJUnitPlatform()
+}
+
+sourceSets {
+    main {
+        java {
+            srcDirs += "$buildDir/generated"
+        }
+    }
+
+}
+
+bootJar {
+    enabled = false
+}
+
+jar {
+    enabled = true
+}
+
+tasks.register("prepareKotlinBuildScriptModel"){}
+
+//def authorizationToken = System.properties["specification_repository_authorization_token"]
+
+tasks.register('generate spring-boot-openapi-generation-service 1.0.0 server', GenerateTask) {
+    generatorName.set("spring")
+//    remoteInputSpec.set("https://raw.githubusercontent.com/SaintCheshire/specifications/main/repository/spring-boot-openapi-generation/1.0.0/api.yaml")
+    inputSpec.set("${project.getLayout().projectDirectory}/specification/1.0.0/api.yaml")
+//    auth.set("Authorization:Bearer $authorizationToken")
+    outputDir.set("${project.getLayout().getBuildDirectory().get()}/generated")
+//    sourceSets.test.output.classesDirs.
+    ignoreFileOverride.set("${project.getLayout().projectDirectory}/.openapi-generator-ignore")
+    configOptions.set([
+            library                             : "spring-boot",
+            invokerPackage                      : "ua.userfusion.specifications.spring_boot_openapi_generation.v1_0_0.server",
+            apiPackage                          : "ua.userfusion.specifications.spring_boot_openapi_generation.v1_0_0.server.api",
+            modelPackage                        : "ua.userfusion.specifications.spring_boot_openapi_generation.v1_0_0.server.model",
+            configPackage                       : "ua.userfusion.specifications.spring_boot_openapi_generation.v1_0_0.server.configuration",
+            basePackage                         : "ua.userfusion.specifications.spring_boot_openapi_generation.v1_0_0.server",
+            useOptional                         : "true",
+            openApiNullable                     : "false",
+            interfaceOnly                       : "true",
+            sourceFolder                        : "",
+            additionalModelTypeAnnotations      : "@lombok.Builder(toBuilder = true)\n@lombok.RequiredArgsConstructor\n@lombok.AllArgsConstructor\n@com.fasterxml.jackson.annotation.JsonIgnoreProperties(ignoreUnknown=true)",
+            generatedConstructorWithRequiredArgs: "false",
+            useTags                             : "true",
+            useSpringBoot3                      : "true",
+            useJakartaEe                        : "true"
+    ])
+    globalProperties.set([
+            // https://github.com/OpenAPITools/openapi-generator/blob/master/docs/global-properties.md
+            apiTests: "false",
+            modelTests: "false",
+            apiDocs: "true",
+            modelDocs: "true"
+    ])
+}
+//
+//tasks.register('generate spring-boot-openapi-generation-service 1.0.0 client', GenerateTask) {
+//    generatorName.set("spring")
+//    remoteInputSpec.set("https://raw.githubusercontent.com/SaintCheshire/specifications/main/repository/spring-boot-openapi-generation/1.0.0/api.yaml")
+////    auth.set("Authorization:Bearer $authorizationToken")
+//    outputDir.set("$buildDir/generated")
+//    ignoreFileOverride.set(".openapi-generator-ignore")
+//    configOptions.set([
+//            library                             : "spring-cloud",
+//            invokerPackage                      : "ua.userfusion.specifications.spring_boot_openapi_generation.v1_0_0.client",
+//            apiPackage                          : "ua.userfusion.specifications.spring_boot_openapi_generation.v1_0_0.client.api",
+//            modelPackage                        : "ua.userfusion.specifications.spring_boot_openapi_generation.v1_0_0.client.model",
+//            configPackage                       : "ua.userfusion.specifications.spring_boot_openapi_generation.v1_0_0.client.configuration",
+//            basePackage                         : "ua.userfusion.specifications.spring_boot_openapi_generation.v1_0_0.client",
+//            useOptional                         : "true",
+//            openApiNullable                     : "false",
+//            enumUnknownDefaultCase              : "true",
+//            interfaceOnly                       : "false",
+//            sourceFolder                        : "",
+//            additionalModelTypeAnnotations      : "@lombok.Builder(toBuilder = true)\n@lombok.RequiredArgsConstructor\n@lombok.AllArgsConstructor",
+//            generatedConstructorWithRequiredArgs: "false",
+//            useTags                             : "true"
+//    ])
+//}
+tasks.register('generate server') {
+    dependsOn(
+            'generate spring-boot-openapi-generation-service 1.0.0 server'
+//            ,
+//            'generate spring-boot-openapi-generation-service 1.0.0 client'
+    )
+}
+
+compileJava.dependsOn 'generate server'

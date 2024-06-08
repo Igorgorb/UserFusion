@@ -1,0 +1,11 @@
+spring:
+  application:
+    name: user-fusion-backend
+  config:
+    activate:
+      on-profile: default
+    name: ${spring.application.name}
+    import: optional:configserver:http://uf-config:80
+  cloud:
+    config:
+      fail-fast: false

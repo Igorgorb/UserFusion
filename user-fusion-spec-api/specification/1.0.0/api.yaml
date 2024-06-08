@@ -1,0 +1,92 @@
+openapi: 3.0.0
+servers:
+  - url: http://localhost:8000/
+    description: "local host"
+  # Added by API Auto Mocking Plugin
+  - url: https://virtserver.swaggerhub.com/IGORGORB_1/user-fusion-api/1.0.0
+    description: SwaggerHub API Auto Mocking
+info:
+  description: This is an API for viewing information about users
+  version: "1.0.0"
+  title: Aggregating User Data API
+  contact:
+    name: Ihor Horbonos
+    email: igorgorb@gmail.com
+  license:
+    name: Apache 2.0
+    url: 'http://www.apache.org/licenses/LICENSE-2.0.html'
+tags:
+  - name: UserResource
+    description: Operations with users
+paths:
+  /users:
+    get:
+      tags:
+        - UserResource
+      summary: Return a list of user data
+      operationId: getUsers
+      description: |
+        Return a list of aggregated user data
+      responses:
+        '200':
+          description: Return a list of user data
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/User'
+        '400':
+          description: "BadRequest"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+        '500':
+          description: "Internal server error"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+        '503':
+          description: "Service unavailable"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+components:
+  schemas:
+    User:
+      type: object
+      required:
+        - id
+        - username
+        - name
+        - surname
+      properties:
+        id:
+          type: string
+          description: Some kind of user identifier
+          example: example-user-id-1
+        username:
+          type: string
+          description: Some user login
+          example: user-1
+        name:
+          type: string
+          description: Some user name
+          example: Jhon
+        surname:
+          type: string
+          description: Some user surname
+          example: Johnsonuk
+    Error:
+      type: "object"
+      properties:
+        code:
+          type: "integer"
+          format: "32"
+        message:
+          type: "string"
+        description:
+          type: "string"

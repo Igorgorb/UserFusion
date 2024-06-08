@@ -1,0 +1,65 @@
+spring:
+  application:
+    name: user-fusion-backend
+  #Logging properties
+  logging:
+    level:
+      - root: error
+      - org.springframework: info
+      - ua.igorg: debug
+    file.name: ./app/logs/application.log
+#  docker:
+#    compose:
+#      enabled: false
+#  profiles:
+#    active: native
+#  cloud:
+#     config:
+#       server:
+#           native:
+#              searchLocations: file://C:\JProj\Interview\UserFusion\user-fusion-cloud-config-server\src\main\resources\config\user-fusion-backend
+  data-sources:
+    - name: data-base-1
+      strategy: postgres
+      url: jdbc:postgresql://uf-postgres:5432/mydatabase?user=myuser&password=secret&?options=-c%20search_path=test,public
+      table: users
+      user: testuser
+      password: testpass
+      mapping:
+        id: user_id
+        username: login
+        name: first_name
+        surname: last_name
+    - name: data-base-2
+      strategy: postgres
+      url: jdbc:postgresql://uf-postgres:5432/mydatabase?user=myuser&password=secret&?options=-c%20search_path=test,public
+      table: user_table
+      user: testuser
+      password: testpass
+      mapping:
+        id: ldap_login
+        username: ldap_login
+        name: name
+        surname: surname
+    - name: data-base-3
+      strategy: mysql
+      url: jdbc:mysql://myuser:secret@uf-mysql:3306/mydatabase
+      table: user_table
+      user: testuser
+      password: testpass
+      mapping:
+        id: oauth_login
+        username: us_name
+        name: fname
+        surname: sname
+    - name: data-base-4
+      strategy: sqlserver
+      url: jdbc:sqlserver://uf-sqlserver:1433;database=TestDB;user=sa;password=verYs3cret;encrypt=true;trustServerCertificate=true;
+      table: users_table
+      user: sa
+      password: verYs3cret
+      mapping:
+        id: id
+        username: usr_name
+        name: first_name
+        surname: surname

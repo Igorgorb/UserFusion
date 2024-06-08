@@ -1,0 +1,67 @@
+spring:
+  application:
+    name: user-fusion-backend
+  config:
+    activate:
+      on-profile: default
+    name: ${spring.application.name}
+    import: optional:configserver:http://uf-config:80
+  cloud:
+    config:
+      fail-fast: false
+  mustache:
+    check-template-location: false
+
+  data-sources:
+    - name: data-base-1
+      strategy: postgres
+      url: jdbc:postgresql://localhost:59530/mydatabase?user=myuser&password=secret&?options=-c%20search_path=test,public
+      table: users
+      user: testuser
+      password: testpass
+      mapping:
+        id: user_id
+        username: login
+        name: first_name
+        surname: last_name
+    - name: data-base-2
+      strategy: postgres
+      url: jdbc:postgresql://localhost:59530/mydatabase?user=myuser&password=secret&?options=-c%20search_path=test,public
+      table: user_table
+      user: testuser
+      password: testpass
+      mapping:
+        id: ldap_login
+        username: ldap_login
+        name: name
+        surname: surname
+    - name: data-base-3
+      strategy: mysql
+      url: jdbc:mysql://myuser:secret@localhost:64109/mydatabase
+      table: user_table
+      user: testuser
+      password: testpass
+      mapping:
+        id: oauth_login
+        username: us_name
+        name: fname
+        surname: sname
+    - name: data-base-4
+      strategy: sqlserver
+      url: jdbc:sqlserver://localhost:64110;database=TestDB;user=sa;password=verYs3cret;encrypt=true;trustServerCertificate=true;
+      table: users_table
+      user: sa
+      password: verYs3cret
+      mapping:
+        id: id
+        username: usr_name
+        name: first_name
+        surname: surname
+
+#Logging properties
+logging:
+  level:
+    - root: ERROR
+    - org.springframework: INFO
+    - ua.igorg: DEBUG
+  file.name: ./app/logs/application.log

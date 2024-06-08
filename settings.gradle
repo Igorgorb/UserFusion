@@ -1,0 +1,3 @@
+rootProject.name = 'user-fusion'
+include 'user-fusion-spec-api', 'user-fusion-backend', 'user-fusion-cloud-config-server'
+
