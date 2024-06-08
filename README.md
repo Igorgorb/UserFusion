@@ -44,6 +44,9 @@ Java 17 is required.
     ```sh
     git clone https://github.com/Igorgorb/UserFusion.git
     ```
+    ```sh
+    cd UserFusion
+    ```
 
 2. Then, build the artifacts:
     
@@ -109,6 +112,9 @@ The `docker/logs` folder is mounted in the container to save service logs.
 
     ```sh
     git clone https://github.com/Igorgorb/UserFusion.git
+    ```
+    ```sh
+    cd UserFusion
     ```
 
 2. Configure data sources:
