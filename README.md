@@ -35,7 +35,7 @@ Using this information, a `jdbcTemplate` object is created, which performs the f
 
 ### Prerequisites
 
-Java 17 is required.
+Java 17 and Docker 26.1 are required to run the demo in the container.
 
 ### Running the Demo
 
@@ -75,7 +75,7 @@ Database access settings for retrieving information are located in the file:
 data-sources:
   - name: data-base-1
     strategy: postgres
-    url: jdbc:postgresql://localhost:59530/mydatabase?user=myuser&password=secret&?options=-c%20search_path=test,public
+    url: jdbc:postgresql://uf-postgres:5432/mydatabase?user=myuser&password=secret&?options=-c%20search_path=test,public
     table: users
     user: testuser
     password: testpass
@@ -86,7 +86,7 @@ data-sources:
       surname: last_name
   - name: data-base-2
     strategy: mysql
-    url: jdbc:mysql://myuser:secret@localhost:64109/mydatabase
+    url: jdbc:mysql://myuser:secret@uf-mysql:3306/mydatabase
     table: user_table
     user: testuser
     password: testpass
