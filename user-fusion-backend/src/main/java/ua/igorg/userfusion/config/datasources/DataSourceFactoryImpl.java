@@ -1,4 +1,4 @@
-package ua.igorg.userfusion.config.jdbc;
+package ua.igorg.userfusion.config.datasources;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
