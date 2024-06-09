@@ -141,7 +141,7 @@ The `docker/logs` folder is mounted in the container to save service logs.
 4. Run the service:
 
     ```sh
-    java -jar user-fusion-backend-0.0.1-SNAPSHOT.jar
+    java -jar ./user-fusion-backend/build/libs/user-fusion-backend-0.0.1-SNAPSHOT.jar
     ```
 
 5. After starting, the service will be available at:
