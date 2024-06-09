@@ -1,4 +1,4 @@
-package ua.igorg.userfusion.config.datasources;
+package ua.igorg.userfusion.config;
 
 import org.springframework.jdbc.core.JdbcTemplate;
 
