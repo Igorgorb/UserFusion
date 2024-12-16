@@ -14,7 +14,6 @@ services:
       - '64109:3306'
     volumes:
       - ./sql/mysql:/docker-entrypoint-initdb.d
-#      - "./sql/mysql/mysql_create_and_fill_tables.sql:/docker-entrypoint-initdb.d/12.sql"
     healthcheck:
       test: ["CMD", "mysqladmin", "ping", "-h", "localhost"]
       interval: 10s
@@ -36,22 +35,16 @@ services:
     ports:
       - '59530:5432'
     volumes:
-#      - ./sql/postgres/setup.sh:/docker-entrypoint-initdb.d/initdb.sh
       - ./sql/postgres/pg_create_and_fill_tables.sql:/docker-entrypoint-initdb.d/init.sql
   sqlserver:
     container_name: uf-sqlserver
     build:
       context: .
       dockerfile: sql/sqlserver/Dockerfile
-#    image: 'mcr.microsoft.com/mssql/server:latest'
-#    environment:
-#      - 'ACCEPT_EULA=yes'
-#      - 'MSSQL_PID=express'
-#      - 'MSSQL_SA_PASSWORD=verYs3cret'
     ports:
       - '64110:1433'
     healthcheck:
-      test: /opt/mssql-tools/bin/sqlcmd -S localhost -U sa -P "verYs3cret" -Q "CREATE DATABASE TestDB"
+      test: /opt/mssql-tools18/bin/sqlcmd -S localhost -U sa -P "verYs3cret" -C -Q "CREATE DATABASE TestDB"
       interval: 10s
       timeout: 3s
       retries: 10
