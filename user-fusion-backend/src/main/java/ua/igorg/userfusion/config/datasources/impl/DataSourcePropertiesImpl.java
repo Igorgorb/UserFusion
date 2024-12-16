@@ -17,10 +17,8 @@ import java.util.List;
 @Data
 @Component
 @Configuration
-//@EnableConfigurationProperties
-//@PropertySource(value = "data-sources.yaml", factory = YamlPropertySourceFactory.class)
-@ConfigurationProperties(prefix = "spring")//, factory = YamlPropertySourceFactory.class)
+@ConfigurationProperties(prefix = "spring")
 public class DataSourcePropertiesImpl implements DataSourceProperties {
 
-	private List<DataSource> dataSources = new ArrayList<>();
+    private List<DataSource> dataSources = new ArrayList<>();
 }

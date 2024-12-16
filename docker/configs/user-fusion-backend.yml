@@ -8,16 +8,6 @@ spring:
       - org.springframework: info
       - ua.igorg: debug
     file.name: ./app/logs/application.log
-#  docker:
-#    compose:
-#      enabled: false
-#  profiles:
-#    active: native
-#  cloud:
-#     config:
-#       server:
-#           native:
-#              searchLocations: file://C:\JProj\Interview\UserFusion\user-fusion-cloud-config-server\src\main\resources\config\user-fusion-backend
   data-sources:
     - name: data-base-1
       strategy: postgres

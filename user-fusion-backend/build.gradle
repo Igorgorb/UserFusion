@@ -22,7 +22,6 @@ repositories {
 }
 
 ext {
-//	set('springCloudVersion', "2023.0.2")
 	versionH2Database = '2.2.224'
 }
 
@@ -31,10 +30,7 @@ dependencies {
 	implementation 'org.springframework.boot:spring-boot-starter-jdbc'
 	implementation 'org.springframework.boot:spring-boot-starter-web'
 	implementation 'org.springframework.cloud:spring-cloud-starter-config'
-//	implementation "io.swagger.core.v3:swagger-annotations:2.2.22"
 
-
-	// https://mvnrepository.com/artifact/org.springdoc/springdoc-openapi-starter-webmvc-ui
 	implementation "org.springdoc:springdoc-openapi-starter-webmvc-ui:${versionOpenApiWebMvcUI}" //:2.5.0'
 	runtimeOnly "com.h2database:h2:${versionH2Database}" //2.2.224'
 	runtimeOnly 'com.microsoft.sqlserver:mssql-jdbc'
@@ -72,7 +68,7 @@ bootJar {
 	}
 	enabled = true
 	archiveBaseName = "${project.name}"
-	duplicatesStrategy = 'exclude'
+	duplicatesStrategy = 'EXCLUDE'
 }
 
 tasks.named('test') {

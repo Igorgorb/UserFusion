@@ -20,21 +20,19 @@ import ua.igorg.userfusion.config.datasources.DataSourceProperties;
 @DisplayName("UserServiceImplTest")
 class UserServiceImplTest {
 
-	@Mock
-	private DataSourceFactory dataSourceFactory;
-	@Mock
-	private DataSourceProperties dataSourceProperties;
+    @Mock
+    private DataSourceFactory dataSourceFactory;
+    @Mock
+    private DataSourceProperties dataSourceProperties;
 
-	@InjectMocks
-	private UserServiceImpl badgeAssignmentService;
+    @InjectMocks
+    private UserServiceImpl badgeAssignmentService;
 
-	@BeforeEach
-	public void setUp() {
-//		user = UserFactory.createUserWithId(USER_ID);
-//		badge = new Badge(0L, List.of(new BadgeLocalization("name", "description", BadgeCriteria.TASK_ONE)));
-	}
+    @BeforeEach
+    public void setUp() {
+    }
 
-	@Test
-	void getUsersMS() throws Exception {
-	}
+    @Test
+    void getUsers() throws Exception {
+    }
 }
