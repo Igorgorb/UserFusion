@@ -26,6 +26,7 @@ else
         SQLCMDAPPPATH="/opt/mssql-tools18/bin/sqlcmd"
     else
         echo "Not found path to sqlcmd util!!"
+        exit 1
     fi
 fi
 
