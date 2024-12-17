@@ -31,7 +31,7 @@ dependencies {
 	implementation 'org.springframework.boot:spring-boot-starter-web'
 	implementation 'org.springframework.cloud:spring-cloud-starter-config'
 
-	implementation "org.springdoc:springdoc-openapi-starter-webmvc-ui:${versionOpenApiWebMvcUI}" //:2.5.0'
+	implementation "org.springdoc:springdoc-openapi-starter-webmvc-ui:${versionOpenApiWebMvcUI}"
 	runtimeOnly "com.h2database:h2:${versionH2Database}" //2.2.224'
 	runtimeOnly 'com.microsoft.sqlserver:mssql-jdbc'
 	runtimeOnly 'com.mysql:mysql-connector-j'
@@ -43,11 +43,13 @@ dependencies {
 	annotationProcessor 'org.springframework.boot:spring-boot-configuration-processor'
 	annotationProcessor 'org.projectlombok:lombok'
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
+	testImplementation "com.h2database:h2:${versionH2Database}" //2.2.224'
 	testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
+
 
 	configurations {
 		implemenation {
-			exclude group: 'org.slf4j'
+			exclude group: 'org.slf4j', module: 'slf4j-simple'
 		}
 	}
 }

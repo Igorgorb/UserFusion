@@ -6,15 +6,15 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.autoconfigure.jdbc.DataSourceAutoConfiguration;
 import org.springframework.context.annotation.Import;
-import ua.igorg.userfusion.config.DataSourceFactoryImpl;
-import ua.igorg.userfusion.config.datasources.impl.DataSourcePropertiesImpl;
+import ua.igorg.userfusion.config.DataSourceSupplier;
+import ua.igorg.userfusion.config.datasources.DataSourceProperties;
 
 @SpringBootApplication(exclude = DataSourceAutoConfiguration.class, scanBasePackages = {"ua.igorg.userfusion", "ua.userfusion"})
-@Import({DataSourceFactoryImpl.class})
+@Import({DataSourceSupplier.class})
 public class UserFusionBackendApplication implements CommandLineRunner {
 
     @Autowired
-    private DataSourcePropertiesImpl dataSourcePropertiesImpl;
+    private DataSourceProperties dataSourceProperties;
 
     public static void main(final String[] args) {
         SpringApplication.run(UserFusionBackendApplication.class, args);
@@ -23,7 +23,7 @@ public class UserFusionBackendApplication implements CommandLineRunner {
     @Override
     public void run(final String... args) throws Exception {
         System.out.println("CommandLineRunner start run");
-        System.out.println(dataSourcePropertiesImpl.getDataSources());
+        System.out.println(dataSourceProperties.getDataSources());
         System.out.println("CommandLineRunner end run");
     }
 }

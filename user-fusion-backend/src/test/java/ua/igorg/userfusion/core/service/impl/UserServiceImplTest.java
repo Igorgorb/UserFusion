@@ -8,7 +8,7 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
-import ua.igorg.userfusion.config.DataSourceFactory;
+import ua.igorg.userfusion.config.DataSourceSupplier;
 import ua.igorg.userfusion.config.datasources.DataSourceProperties;
 
 /**
@@ -21,7 +21,7 @@ import ua.igorg.userfusion.config.datasources.DataSourceProperties;
 class UserServiceImplTest {
 
     @Mock
-    private DataSourceFactory dataSourceFactory;
+    private DataSourceSupplier dataSourceSupplier;
     @Mock
     private DataSourceProperties dataSourceProperties;
 

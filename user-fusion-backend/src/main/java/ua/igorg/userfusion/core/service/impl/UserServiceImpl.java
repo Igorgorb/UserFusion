@@ -3,12 +3,11 @@ package ua.igorg.userfusion.core.service.impl;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
-import ua.igorg.userfusion.config.DataSourceFactory;
+import ua.igorg.userfusion.config.DataSourceSupplier;
 import ua.igorg.userfusion.config.datasources.DataSourceProperties;
 import ua.igorg.userfusion.core.domain.User;
 import ua.igorg.userfusion.core.service.UserService;
 
-import javax.sql.DataSource;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -23,13 +22,13 @@ public class UserServiceImpl implements UserService {
 
     private static final Logger LOG = LoggerFactory.getLogger(UserServiceImpl.class);
 
-    private final DataSourceFactory dataSourceFactory;
+    private final DataSourceSupplier dataSourceSupplier;
 
     private final DataSourceProperties dataSourceProperties;
 
-    public UserServiceImpl(final DataSourceFactory dataSourceFactory,
+    public UserServiceImpl(final DataSourceSupplier dataSourceSupplier,
                            final DataSourceProperties dataSourceProperties) {
-        this.dataSourceFactory = dataSourceFactory;
+        this.dataSourceSupplier = dataSourceSupplier;
         this.dataSourceProperties = dataSourceProperties;
     }
 
@@ -37,13 +36,11 @@ public class UserServiceImpl implements UserService {
     public List<User> getUsers() {
         final List<User> list = new ArrayList<>();
         dataSourceProperties.getDataSources().forEach(d -> {
-            final DataSource ds = dataSourceFactory.getDataSource(
+            final var jdbcTemplate = dataSourceSupplier.getJdbcTemplate(
                     d.getStrategy().getDriver(),
                     d.getUrl(),
                     d.getUser(),
-                    d.getPassword()
-            );
-            final var jdbcTemplate = dataSourceFactory.getCustomJdbcTemplate(ds);
+                    d.getPassword());
             List<User> results = null;
             try {
                 results = jdbcTemplate.query(
