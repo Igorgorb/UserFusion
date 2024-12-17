@@ -3,6 +3,9 @@ spring:
     name: user-fusion-backend
   mustache:
     check-template-location: false
+  cloud:
+    config:
+      enabled: off
 
   data-sources:
     - name: data-base-1

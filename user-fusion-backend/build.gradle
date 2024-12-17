@@ -1,84 +1,88 @@
 plugins {
-	id 'java'
-	id 'org.springframework.boot' version '3.3.0'
-	id 'io.spring.dependency-management' version '1.1.5'
+    id 'java'
+    id 'org.springframework.boot' version '3.3.0'
+    id 'io.spring.dependency-management' version '1.1.5'
 }
 
 version = '0.0.1-SNAPSHOT'
 
 java {
-	sourceCompatibility = JavaVersion.VERSION_17
-	targetCompatibility = JavaVersion.VERSION_17
+    sourceCompatibility = JavaVersion.VERSION_17
+    targetCompatibility = JavaVersion.VERSION_17
 }
 
 configurations {
-	compileOnly {
-		extendsFrom annotationProcessor
-	}
+    compileOnly {
+        extendsFrom annotationProcessor
+    }
 }
 
 repositories {
-	mavenCentral()
+    mavenCentral()
 }
 
 ext {
-	versionH2Database = '2.2.224'
+    versionH2Database = '2.2.224'
 }
 
-dependencies {
-	implementation project(':user-fusion-spec-api')
-	implementation 'org.springframework.boot:spring-boot-starter-jdbc'
-	implementation 'org.springframework.boot:spring-boot-starter-web'
-	implementation 'org.springframework.cloud:spring-cloud-starter-config'
-	implementation 'org.mapstruct:mapstruct:1.6.3'
-
-	implementation "org.springdoc:springdoc-openapi-starter-webmvc-ui:${versionOpenApiWebMvcUI}"
-	runtimeOnly "com.h2database:h2:${versionH2Database}" //2.2.224'
-	runtimeOnly 'com.microsoft.sqlserver:mssql-jdbc'
-	runtimeOnly 'com.mysql:mysql-connector-j'
-	runtimeOnly 'com.oracle.database.jdbc:ojdbc11'
-	runtimeOnly 'org.postgresql:postgresql'
-
-
-	compileOnly 'org.projectlombok:lombok'
-	annotationProcessor 'org.mapstruct:mapstruct-processor:1.6.3'
-	annotationProcessor 'org.projectlombok:lombok'
-	annotationProcessor 'org.projectlombok:lombok-mapstruct-binding:0.2.0'
-	annotationProcessor 'org.springframework.boot:spring-boot-configuration-processor'
-
-	testImplementation 'org.springframework.boot:spring-boot-starter-test'
-	testImplementation "com.h2database:h2:${versionH2Database}" //2.2.224'
-	testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
-
-
-	configurations {
-		implemenation {
-			exclude group: 'org.slf4j', module: 'slf4j-simple'
-		}
+configurations {
+	configureEach {
+		exclude group: 'org.slf4j', module: 'slf4j-simple'
 	}
+}
+dependencies {
+    implementation project(':user-fusion-spec-api')
+    implementation 'org.springframework.boot:spring-boot-starter-jdbc'
+    implementation 'org.springframework.boot:spring-boot-starter-web'
+    implementation 'org.springframework.cloud:spring-cloud-starter-config'
+    implementation 'org.mapstruct:mapstruct:1.6.3'
+
+    implementation "org.springdoc:springdoc-openapi-starter-webmvc-ui:${versionOpenApiWebMvcUI}"
+    // JAX-B dependencies for JDK 9+
+    implementation 'jakarta.xml.bind:jakarta.xml.bind-api:4.0.2'
+    implementation 'org.glassfish.jaxb:jaxb-runtime:4.0.5'
+    runtimeOnly "com.h2database:h2:${versionH2Database}" //2.2.224'
+    runtimeOnly 'com.microsoft.sqlserver:mssql-jdbc'
+    runtimeOnly 'com.mysql:mysql-connector-j'
+    runtimeOnly 'com.oracle.database.jdbc:ojdbc11'
+    runtimeOnly 'org.postgresql:postgresql'
+
+    compileOnly 'org.projectlombok:lombok'
+    annotationProcessor 'org.mapstruct:mapstruct-processor:1.6.3'
+    annotationProcessor 'org.projectlombok:lombok'
+    annotationProcessor 'org.projectlombok:lombok-mapstruct-binding:0.2.0'
+    annotationProcessor 'org.springframework.boot:spring-boot-configuration-processor'
+
+    testImplementation 'org.springframework.boot:spring-boot-starter-test'
+    testImplementation "com.h2database:h2:${versionH2Database}" //2.2.224'
+    testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
+    testImplementation "org.testcontainers:junit-jupiter:1.20.4"
+    testImplementation "org.testcontainers:mssqlserver:1.20.4"
+    testImplementation "org.testcontainers:mysql:1.20.4"
+    testImplementation "org.testcontainers:postgresql:1.20.4"
 }
 
 dependencyManagement {
-	imports {
-		mavenBom "org.springframework.cloud:spring-cloud-dependencies:${versionSpringCloud}"
-	}
+    imports {
+        mavenBom "org.springframework.cloud:spring-cloud-dependencies:${versionSpringCloud}"
+    }
 }
 
 jar {
-	enabled = false
+    enabled = false
 }
 
 bootJar {
-	manifest {
-		attributes 'Start-Class': 'ua.igorg.userfusion.UserFusionBackendApplication'
-	}
-	enabled = true
-	archiveBaseName = "${project.name}"
-	duplicatesStrategy = 'EXCLUDE'
+    manifest {
+        attributes 'Start-Class': 'ua.igorg.userfusion.UserFusionBackendApplication'
+    }
+    enabled = true
+    archiveBaseName = "${project.name}"
+    duplicatesStrategy = 'EXCLUDE'
 }
 
 tasks.named('test') {
-	useJUnitPlatform()
+    useJUnitPlatform()
 }
 
 tasks.register("prepareKotlinBuildScriptModel") {}
