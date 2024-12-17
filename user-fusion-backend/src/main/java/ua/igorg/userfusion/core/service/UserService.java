@@ -1,14 +1,14 @@
 package ua.igorg.userfusion.core.service;
 
-import ua.igorg.userfusion.core.domain.User;
+import ua.userfusion.server.model.UserDto;
 
 import java.util.List;
 
 /**
- * @Author igorg
+ * @author igorg
  * @create 01.06.2024
  */
 public interface UserService {
 
-	List<User> getUsers();
+	List<UserDto> getUsers();
 }

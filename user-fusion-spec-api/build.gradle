@@ -104,7 +104,7 @@ tasks.register('generate server', GenerateTask) {
             openApiNullable                     : "false",
             interfaceOnly                       : "true",
             sourceFolder                        : "src/gen/java/main",
-            additionalModelTypeAnnotations      : "@lombok.Builder(toBuilder = true)\n@lombok.RequiredArgsConstructor\n@lombok.AllArgsConstructor\n@com.fasterxml.jackson.annotation.JsonIgnoreProperties(ignoreUnknown=true)",
+            additionalModelTypeAnnotations      : "@lombok.Builder\n@lombok.RequiredArgsConstructor\n@lombok.AllArgsConstructor\n@com.fasterxml.jackson.annotation.JsonIgnoreProperties(ignoreUnknown=true)",
             generatedConstructorWithRequiredArgs: "false",
             useTags                             : "true",
             useSpringBoot3                      : "true",

@@ -1,12 +1,14 @@
 package ua.igorg.userfusion.core.service.impl;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import ua.igorg.userfusion.config.DataSourceSupplier;
 import ua.igorg.userfusion.config.datasources.DataSourceProperties;
 import ua.igorg.userfusion.core.domain.User;
 import ua.igorg.userfusion.core.service.UserService;
+import ua.igorg.userfusion.mappers.UserMapper;
+import ua.userfusion.server.model.UserDto;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -14,27 +16,23 @@ import java.util.List;
 import java.util.Objects;
 
 /**
- * @Author igorg
+ * @author igorg
  * @create 01.06.2024
  */
+@Slf4j
 @Service
+@RequiredArgsConstructor
 public class UserServiceImpl implements UserService {
 
-    private static final Logger LOG = LoggerFactory.getLogger(UserServiceImpl.class);
+    private final UserMapper userMapper;
 
     private final DataSourceSupplier dataSourceSupplier;
 
     private final DataSourceProperties dataSourceProperties;
 
-    public UserServiceImpl(final DataSourceSupplier dataSourceSupplier,
-                           final DataSourceProperties dataSourceProperties) {
-        this.dataSourceSupplier = dataSourceSupplier;
-        this.dataSourceProperties = dataSourceProperties;
-    }
-
     @Override
-    public List<User> getUsers() {
-        final List<User> list = new ArrayList<>();
+    public List<UserDto> getUsers() {
+        final List<UserDto> list = new ArrayList<>();
         dataSourceProperties.getDataSources().forEach(d -> {
             final var jdbcTemplate = dataSourceSupplier.getJdbcTemplate(
                     d.getStrategy().getDriver(),
@@ -60,16 +58,16 @@ public class UserServiceImpl implements UserService {
                         )
                 );
             } catch (final Exception ex) {
-                LOG.error("Strategy: %s, Url: [%s]".formatted(
+                log.error("Strategy: %s, Url: [%s]".formatted(
                         d.getStrategy(),
                         d.getUrl()
                 ), ex);
             }
             if (Objects.nonNull(results)) {
-                list.addAll(results);
+                list.addAll(userMapper.toDto(results));
             }
         });
-        LOG.info("The result contains {} rows", list.size());
+        log.info("The result contains {} rows", list.size());
         return Collections.unmodifiableList(list);
     }
 }
