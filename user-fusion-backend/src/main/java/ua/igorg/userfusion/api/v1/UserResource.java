@@ -5,9 +5,10 @@ import org.slf4j.LoggerFactory;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RestController;
 import ua.igorg.userfusion.api.v1.converter.TypeConverter;
+import ua.igorg.userfusion.core.domain.User;
 import ua.igorg.userfusion.core.service.UserService;
-import ua.userfusion.specifications.spring_boot_openapi_generation.v1_0_0.server.api.UserResourceApi;
-import ua.userfusion.specifications.spring_boot_openapi_generation.v1_0_0.server.model.User;
+import ua.userfusion.server.api.UserResourceApi;
+import ua.userfusion.server.model.UserDto;
 
 import java.util.List;
 
@@ -23,18 +24,18 @@ public class UserResource implements UserResourceApi {
 	private static final Logger LOG = LoggerFactory.getLogger(UserResource.class);
 
 	private final UserService userService;
-	private final TypeConverter<ua.igorg.userfusion.core.domain.User, User> converter;
+	private final TypeConverter<User, UserDto> converter;
 
 	public UserResource(
 		final UserService userService,
-		final TypeConverter<ua.igorg.userfusion.core.domain.User, User> converter
+		final TypeConverter<User, UserDto> converter
 	) {
 		this.userService = userService;
 		this.converter = converter;
 	}
 
 	@Override
-	public ResponseEntity<List<User>> getUsers() {
+	public ResponseEntity<List<UserDto>> getUsers() {
 		LOG.debug(
 			"Received GET request to get users list, request URI:[{}]",
 			getFullRequestUri()

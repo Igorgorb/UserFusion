@@ -3,6 +3,7 @@ package ua.igorg.userfusion.api.v1.converter.impl;
 import org.springframework.stereotype.Component;
 import ua.igorg.userfusion.api.v1.converter.TypeConverter;
 import ua.igorg.userfusion.core.domain.User;
+import ua.userfusion.server.model.UserDto;
 
 /**
  * @Author igorg
@@ -10,20 +11,20 @@ import ua.igorg.userfusion.core.domain.User;
  */
 @Component
 public class UserToUserOpenApiConverter
-	implements TypeConverter<User, ua.userfusion.specifications.spring_boot_openapi_generation.v1_0_0.server.model.User> {
+	implements TypeConverter<User, UserDto> {
 	@Override
 	public Class<User> getSourceClass() {
 		return User.class;
 	}
 
 	@Override
-	public Class<ua.userfusion.specifications.spring_boot_openapi_generation.v1_0_0.server.model.User> getTargetClass() {
-		return ua.userfusion.specifications.spring_boot_openapi_generation.v1_0_0.server.model.User.class;
+	public Class<UserDto> getTargetClass() {
+		return UserDto.class;
 	}
 
 	@Override
-	public ua.userfusion.specifications.spring_boot_openapi_generation.v1_0_0.server.model.User convert(final User source) {
-		return ua.userfusion.specifications.spring_boot_openapi_generation.v1_0_0.server.model.User.builder()
+	public UserDto convert(final User source) {
+		return UserDto.builder()
 			.id(source.getId())
 			.username(source.getUsername())
 			.name(source.getName())

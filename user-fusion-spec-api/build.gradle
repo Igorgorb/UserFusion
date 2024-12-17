@@ -73,7 +73,7 @@ test {
 sourceSets {
     main {
         java {
-            srcDirs += "$buildDir/generated"
+            srcDirs += "$buildDir/generated/src/gen/java/main"
         }
     }
 
@@ -89,22 +89,21 @@ jar {
 
 tasks.register("prepareKotlinBuildScriptModel"){}
 
-tasks.register('generate spring-boot-openapi-generation-service 1.0.0 server', GenerateTask) {
+tasks.register('generate server', GenerateTask) {
     generatorName.set("spring")
     inputSpec.set("${project.getLayout().projectDirectory}/specification/1.0.0/api.yaml")
     outputDir.set("${project.getLayout().getBuildDirectory().get()}/generated")
     ignoreFileOverride.set("${project.getLayout().projectDirectory}/.openapi-generator-ignore")
+    modelNameSuffix.set("Dto")
     configOptions.set([
-            library                             : "spring-boot",
-            invokerPackage                      : "ua.userfusion.specifications.spring_boot_openapi_generation.v1_0_0.server",
-            apiPackage                          : "ua.userfusion.specifications.spring_boot_openapi_generation.v1_0_0.server.api",
-            modelPackage                        : "ua.userfusion.specifications.spring_boot_openapi_generation.v1_0_0.server.model",
-            configPackage                       : "ua.userfusion.specifications.spring_boot_openapi_generation.v1_0_0.server.configuration",
-            basePackage                         : "ua.userfusion.specifications.spring_boot_openapi_generation.v1_0_0.server",
+            library         : "spring-boot",
+            basePackage                         : "ua.userfusion.server",
+            apiPackage                          : "ua.userfusion.server.api",
+            modelPackage                        : "ua.userfusion.server.model",
             useOptional                         : "true",
             openApiNullable                     : "false",
             interfaceOnly                       : "true",
-            sourceFolder                        : "",
+            sourceFolder                        : "src/gen/java/main",
             additionalModelTypeAnnotations      : "@lombok.Builder(toBuilder = true)\n@lombok.RequiredArgsConstructor\n@lombok.AllArgsConstructor\n@com.fasterxml.jackson.annotation.JsonIgnoreProperties(ignoreUnknown=true)",
             generatedConstructorWithRequiredArgs: "false",
             useTags                             : "true",
@@ -112,17 +111,11 @@ tasks.register('generate spring-boot-openapi-generation-service 1.0.0 server', G
             useJakartaEe                        : "true"
     ])
     globalProperties.set([
-            apiTests: "false",
-            modelTests: "false",
-            apiDocs: "true",
-            modelDocs: "true"
+            apiTests        : "false",
+            modelTests      : "false",
+            apiDocs         : "true",
+            modelDocs       : "true"
     ])
-}
-
-tasks.register('generate server') {
-    dependsOn(
-            'generate spring-boot-openapi-generation-service 1.0.0 server'
-    )
 }
 
 compileJava.dependsOn 'generate server'

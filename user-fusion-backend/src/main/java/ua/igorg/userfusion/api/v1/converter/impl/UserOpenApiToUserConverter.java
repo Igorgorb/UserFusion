@@ -2,17 +2,18 @@ package ua.igorg.userfusion.api.v1.converter.impl;
 
 import org.springframework.stereotype.Component;
 import ua.igorg.userfusion.api.v1.converter.TypeConverter;
-import ua.userfusion.specifications.spring_boot_openapi_generation.v1_0_0.server.model.User;
+import ua.userfusion.server.model.UserDto;
+import ua.igorg.userfusion.core.domain.User;
 
 /**
  * @Author igorg
  * @create 03.06.2024
  */
 @Component
-public class UserOpenApiToUserConverter implements TypeConverter<User, ua.igorg.userfusion.core.domain.User> {
+public class UserOpenApiToUserConverter implements TypeConverter<UserDto, User> {
 	@Override
-	public Class<User> getSourceClass() {
-		return User.class;
+	public Class<UserDto> getSourceClass() {
+		return UserDto.class;
 	}
 
 	@Override
@@ -21,8 +22,8 @@ public class UserOpenApiToUserConverter implements TypeConverter<User, ua.igorg.
 	}
 
 	@Override
-	public ua.igorg.userfusion.core.domain.User convert(final User source) {
-		return new ua.igorg.userfusion.core.domain.User(
+	public User convert(final UserDto source) {
+		return new User(
 			source.getId(),
 			source.getUsername(),
 			source.getName(),

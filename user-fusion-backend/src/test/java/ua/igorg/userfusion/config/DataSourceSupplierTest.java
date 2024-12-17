@@ -7,15 +7,16 @@ import org.springframework.jdbc.core.JdbcTemplate;
 
 import javax.sql.DataSource;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertSame;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.mockito.Mockito.spy;
 
 /**
  * @Author igorg
  * @create 07.06.2024
  */
-
-
 class DataSourceSupplierTest {
 
     final String driver = "org.h2.Driver";
@@ -26,7 +27,7 @@ class DataSourceSupplierTest {
 
     @Test
     void testGetDataSourceDefault() {
-        DataSource dataSource = dataSourceSupplier.getDataSource();
+        final DataSource dataSource = dataSourceSupplier.getDataSource();
         assertNotNull(dataSource, "The default DataSource should not be null.");
     }
 
