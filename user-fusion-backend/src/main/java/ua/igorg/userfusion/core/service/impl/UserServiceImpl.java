@@ -16,8 +16,8 @@ import java.util.List;
 import java.util.Objects;
 
 /**
- * @author igorg
- * @create 01.06.2024
+ * Created by igorg
+ * on 01.06.2024
  */
 @Slf4j
 @Service

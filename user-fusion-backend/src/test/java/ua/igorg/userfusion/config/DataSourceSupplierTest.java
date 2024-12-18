@@ -14,8 +14,8 @@ import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.mockito.Mockito.spy;
 
 /**
- * @Author igorg
- * @create 07.06.2024
+ * Created by igorg
+ * on 07.06.2024
  */
 class DataSourceSupplierTest {
 

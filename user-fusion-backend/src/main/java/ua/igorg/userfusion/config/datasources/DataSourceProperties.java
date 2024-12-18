@@ -10,8 +10,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * @Author igorg
- * @create 02.06.2024
+ * Created by igorg
+ * on 02.06.2024
  */
 @Data
 @Component

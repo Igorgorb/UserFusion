@@ -1,8 +1,8 @@
 package ua.igorg.userfusion.exception;
 
 /**
- * @Author igorg
- * @create 03.06.2024
+ * Created by igorg
+ * on 03.06.2024
  */
 public class UserFusionApplicationException  extends RuntimeException {
 

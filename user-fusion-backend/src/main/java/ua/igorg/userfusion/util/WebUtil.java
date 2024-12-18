@@ -7,8 +7,8 @@ import java.net.URLDecoder;
 import java.nio.charset.StandardCharsets;
 
 /**
- * @Author igorg
- * @create 07.06.2024
+ * Created by igorg
+ * on 07.06.2024
  */
 public class WebUtil {
 

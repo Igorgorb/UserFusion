@@ -11,8 +11,8 @@ import org.springframework.util.ClassUtils;
 import javax.sql.DataSource;
 
 /**
- * @Author igorg
- * @create 01.06.2024
+ * Created by igorg
+ * on 01.06.2024
  */
 @Configuration
 public class DataSourceSupplier {

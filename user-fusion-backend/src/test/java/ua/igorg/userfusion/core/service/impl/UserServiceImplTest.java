@@ -12,8 +12,8 @@ import ua.igorg.userfusion.config.DataSourceSupplier;
 import ua.igorg.userfusion.config.datasources.DataSourceProperties;
 
 /**
- * @Author igorg
- * @create 07.06.2024
+ * Created by igorg
+ * on 07.06.2024
  */
 @Disabled
 @ExtendWith(MockitoExtension.class)

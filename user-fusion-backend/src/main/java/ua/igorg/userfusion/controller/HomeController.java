@@ -5,9 +5,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 /**
  * Home redirection to OpenAPI api documentation
- *
- * @Author igorg
- * @create 04.06.2024
+ * Created by igorg
+ * on 04.06.2024
  */
 @Controller
 public class HomeController {

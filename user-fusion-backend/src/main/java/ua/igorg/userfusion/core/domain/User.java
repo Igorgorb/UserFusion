@@ -7,8 +7,8 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 
 /**
- * @author igorg
- * @create 31.05.2024
+ * Created by igorg
+ * on 31.05.2024
  */
 @Getter
 @Setter

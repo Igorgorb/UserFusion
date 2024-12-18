@@ -7,8 +7,8 @@ import ua.userfusion.server.model.UserDto;
 import java.util.List;
 
 /**
- * @author igorg
- * @create 17.12.2024
+ * Created by igorg
+ * on 17.12.2024
  */
 @Mapper(componentModel = "spring")
 public interface UserMapper {

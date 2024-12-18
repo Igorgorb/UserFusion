@@ -13,8 +13,8 @@ import java.util.List;
 import static ua.igorg.userfusion.util.WebUtil.getFullRequestUri;
 
 /**
- * @author igorg
- * @create 31.05.2024
+ * Created by igorg
+ * on 31.05.2024
  */
 @Slf4j
 @RestController
