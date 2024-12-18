@@ -13,8 +13,8 @@ import ua.igorg.userfusion.config.DataSourceSupplier;
 @Import({DataSourceSupplier.class})
 class UserFusionBackendApplicationTests {
 
-	@Test
-	void contextLoads() {
-	}
+    @Test
+    void contextLoads() {
+    }
 }
 
