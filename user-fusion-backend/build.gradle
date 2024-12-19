@@ -2,6 +2,7 @@ plugins {
     id 'java'
     id 'org.springframework.boot' version '3.3.0'
     id 'io.spring.dependency-management' version '1.1.5'
+    id 'com.diffplug.spotless'
 }
 
 version = '0.0.1-SNAPSHOT'
@@ -12,6 +13,9 @@ java {
 }
 
 configurations {
+    configureEach {
+        exclude group: 'org.slf4j', module: 'slf4j-simple'
+    }
     compileOnly {
         extendsFrom annotationProcessor
     }
@@ -21,15 +25,20 @@ repositories {
     mavenCentral()
 }
 
+spotless {
+    java {
+        removeUnusedImports()
+        formatAnnotations()
+        endWithNewline()
+    }
+}
+
+compileJava.dependsOn spotlessApply
+
 ext {
     versionH2Database = '2.2.224'
 }
 
-configurations {
-	configureEach {
-		exclude group: 'org.slf4j', module: 'slf4j-simple'
-	}
-}
 dependencies {
     implementation project(':user-fusion-spec-api')
     implementation 'org.springframework.boot:spring-boot-starter-jdbc'
@@ -61,7 +70,6 @@ dependencies {
     testImplementation "org.testcontainers:mssqlserver:1.20.4"
     testImplementation "org.testcontainers:mysql:1.20.4"
     testImplementation "org.testcontainers:postgresql:1.20.4"
-    // https://mvnrepository.com/artifact/com.atlassian.oai/swagger-request-validator-mockmvc
     testImplementation 'com.atlassian.oai:swagger-request-validator-mockmvc:2.44.1'
 
 }

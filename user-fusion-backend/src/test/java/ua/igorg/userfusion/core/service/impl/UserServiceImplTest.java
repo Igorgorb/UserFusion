@@ -11,28 +11,24 @@ import org.mockito.junit.jupiter.MockitoExtension;
 import ua.igorg.userfusion.config.DataSourceSupplier;
 import ua.igorg.userfusion.config.datasources.DataSourceProperties;
 
-/**
- * Created by igorg
- * on 07.06.2024
- */
+/** Created by igorg on 07.06.2024 */
 @Disabled
 @ExtendWith(MockitoExtension.class)
 @DisplayName("UserServiceImplTest")
 class UserServiceImplTest {
 
-    @Mock
-    private DataSourceSupplier dataSourceSupplier;
-    @Mock
-    private DataSourceProperties dataSourceProperties;
+  @Mock
+  private DataSourceSupplier dataSourceSupplier;
 
-    @InjectMocks
-    private UserServiceImpl badgeAssignmentService;
+  @Mock
+  private DataSourceProperties dataSourceProperties;
 
-    @BeforeEach
-    public void setUp() {
-    }
+  @InjectMocks
+  private UserServiceImpl userService;
 
-    @Test
-    void getUsers() throws Exception {
-    }
+  @BeforeEach
+  public void setUp() {}
+
+  @Test
+  void getUsers() throws Exception {}
 }

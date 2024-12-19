@@ -1,14 +1,10 @@
 package ua.igorg.userfusion.core.service;
 
+import java.util.List;
 import ua.userfusion.server.model.UserDto;
 
-import java.util.List;
-
-/**
- * Created by igorg
- * on 01.06.2024
- */
+/** Created by igorg on 01.06.2024 */
 public interface UserService {
 
-	List<UserDto> getUsers();
+  List<UserDto> getUsers();
 }
