@@ -42,7 +42,9 @@ dependencies {
 
     compileOnly 'org.projectlombok:lombok'
     annotationProcessor 'org.projectlombok:lombok'
-
+// there are declaration don't use in this project
+// BUT without them, the average execution time
+// of integration tests in the backend project increases by half a minute.
     testImplementation platform('org.junit:junit-bom')
 
     testImplementation 'org.springframework.boot:spring-boot-starter-test'
@@ -59,7 +61,6 @@ dependencies {
             exclude group: 'org.slf4j'
         }
     }
-
 }
 
 checkstyle {
