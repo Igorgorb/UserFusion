@@ -15,10 +15,6 @@ repositories {
 	mavenCentral()
 }
 
-//ext {
-//	set('springCloudVersion', "2023.0.2")
-//}
-
 dependencies {
 	implementation 'org.springframework.cloud:spring-cloud-config-server'
 	implementation 'org.springframework.boot:spring-boot-starter-actuator'
@@ -42,7 +38,7 @@ bootJar {
 	}
 	enabled = true
 	archiveBaseName = "${project.name}"
-	duplicatesStrategy = 'exclude'
+	duplicatesStrategy = 'EXCLUDE'
 }
 
 tasks.named('test') {
@@ -50,7 +46,3 @@ tasks.named('test') {
 }
 
 tasks.register("prepareKotlinBuildScriptModel") {}
-
-//tasks.withType(Checkstyle).configureEach {
-//	configDirectory.set(srcDirs)
-//}

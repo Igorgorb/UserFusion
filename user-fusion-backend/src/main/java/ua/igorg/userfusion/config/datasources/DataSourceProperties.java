@@ -1,13 +1,19 @@
 package ua.igorg.userfusion.config.datasources;
 
+import java.util.ArrayList;
+import java.util.List;
+import lombok.Data;
+import org.springframework.boot.context.properties.ConfigurationProperties;
+import org.springframework.context.annotation.Configuration;
+import org.springframework.stereotype.Component;
 import ua.igorg.userfusion.config.datasources.model.DataSource;
 
-import java.util.List;
+/** Created by igorg on 02.06.2024 */
+@Data
+@Component
+@Configuration
+@ConfigurationProperties(prefix = "spring")
+public class DataSourceProperties {
 
-/**
- * @Author igorg
- * @create 02.06.2024
- */
-public interface DataSourceProperties {
-	List<DataSource> getDataSources();
+  private List<DataSource> dataSources = new ArrayList<>();
 }

@@ -3,6 +3,9 @@ spring:
     name: user-fusion-backend
   mustache:
     check-template-location: false
+  cloud:
+    config:
+      enabled: off
 
   data-sources:
     - name: data-base-1
@@ -54,6 +57,17 @@ spring:
 logging:
   level:
     - root: ERROR
-    - org.springframework: INFO
+#    - org.springframework: INFO
     - ua.igorg: DEBUG
-  file.name: ./user-fusion-backend/logs/application.log
+    - org.springframework.boot.test.context.SpringBootTestContextBootstrapper: WARN
+#    - org.springframework.test.context.support.AbstractContextLoader: WARN
+#    - org.springframework.test.context.support.AnnotationConfigContextLoaderUtils: WARN
+    - org:
+        springframework:
+          test:
+            context:
+              support:
+                AnnotationConfigContextLoaderUtils: WARN
+                AbstractContextLoader: WARN
+#    - org.springframework.test.context.support.AnnotationConfigContextLoaderUtils: WARN
+  file.name: ./user-fusion-backend/logs/application-test.log

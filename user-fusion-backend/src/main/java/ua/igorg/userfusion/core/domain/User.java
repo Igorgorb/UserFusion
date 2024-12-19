@@ -1,17 +1,20 @@
 package ua.igorg.userfusion.core.domain;
 
 import lombok.AllArgsConstructor;
-import lombok.Data;
+import lombok.Builder;
+import lombok.Getter;
+import lombok.RequiredArgsConstructor;
+import lombok.Setter;
 
-/**
- * @Author igorg
- * @create 31.05.2024
- */
-@Data
+/** Created by igorg on 31.05.2024 */
+@Getter
+@Setter
+@RequiredArgsConstructor
 @AllArgsConstructor
+@Builder
 public class User {
-	private String id;
-	private String username;
-	private String name;
-	private String surname;
+  private String id;
+  private String username;
+  private String name;
+  private String surname;
 }

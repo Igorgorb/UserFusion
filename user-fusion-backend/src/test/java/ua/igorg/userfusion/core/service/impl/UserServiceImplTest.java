@@ -8,33 +8,27 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
-import ua.igorg.userfusion.config.DataSourceFactory;
+import ua.igorg.userfusion.config.DataSourceSupplier;
 import ua.igorg.userfusion.config.datasources.DataSourceProperties;
 
-/**
- * @Author igorg
- * @create 07.06.2024
- */
+/** Created by igorg on 07.06.2024 */
 @Disabled
 @ExtendWith(MockitoExtension.class)
 @DisplayName("UserServiceImplTest")
 class UserServiceImplTest {
 
-	@Mock
-	private DataSourceFactory dataSourceFactory;
-	@Mock
-	private DataSourceProperties dataSourceProperties;
+  @Mock
+  private DataSourceSupplier dataSourceSupplier;
 
-	@InjectMocks
-	private UserServiceImpl badgeAssignmentService;
+  @Mock
+  private DataSourceProperties dataSourceProperties;
 
-	@BeforeEach
-	public void setUp() {
-//		user = UserFactory.createUserWithId(USER_ID);
-//		badge = new Badge(0L, List.of(new BadgeLocalization("name", "description", BadgeCriteria.TASK_ONE)));
-	}
+  @InjectMocks
+  private UserServiceImpl userService;
 
-	@Test
-	void getUsersMS() throws Exception {
-	}
+  @BeforeEach
+  public void setUp() {}
+
+  @Test
+  void getUsers() throws Exception {}
 }
