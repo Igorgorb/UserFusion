@@ -180,6 +180,7 @@ For this run option, logging occurs at:
 - [x] Set up database initialization, table creation, and table data population for each database server
 - [x] Configure logging
 - [x] Write ReadMe
-- [ ] Add logic for reading from multiple sources using a custom implementation of `AbstractRoutingDataSource`
+- [x] Addressed code review comments from the Team Lead.
+- [x] Add integration tests for reading from multiple sources using Testcontainer
 - [ ] Add logic for filtering data on request
 - [ ] Add pagination for displaying results
