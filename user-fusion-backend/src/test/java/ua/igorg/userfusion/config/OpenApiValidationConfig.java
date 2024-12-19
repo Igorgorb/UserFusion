@@ -5,6 +5,6 @@ package ua.igorg.userfusion.config;
  */
 public class OpenApiValidationConfig {
 
-    public static final String OA3_SPEC = "..\\1\\user-fusion-spec-api\\specification\\1.0.0\\api.yaml";
+    public static final String OA3_SPEC = "..\\user-fusion-spec-api\\specification\\1.0.0\\api.yaml";
 
 }
