@@ -27,6 +27,28 @@ paths:
       operationId: getUsers
       description: |
         Return a list of aggregated user data
+      parameters:
+        - in: query
+          name: username
+          schema:
+            type: string
+          required: false
+          description: filter on username
+          example: '?username=ts'
+        - in: query
+          name: name
+          schema:
+            type: string
+          required: false
+          description: filter on name
+          example: '?name=Taylor'
+        - in: query
+          name: surname
+          schema:
+            type: string
+          required: false
+          description: filter on surname
+          example: '?surname=Swift'
       responses:
         '200':
           description: Return a list of user data
