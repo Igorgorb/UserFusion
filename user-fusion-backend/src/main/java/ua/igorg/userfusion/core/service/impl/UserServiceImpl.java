@@ -12,14 +12,16 @@ import ua.igorg.userfusion.util.FieldName;
 import ua.igorg.userfusion.util.SqlBuilder;
 import ua.userfusion.server.model.UserDto;
 
+import java.sql.SQLException;
 import java.util.List;
 import java.util.ArrayList;
 import java.util.Objects;
 import java.util.Collections;
 import java.util.Optional;
 import java.util.Map;
-//import java.util.;
-//import java.util.;
+import java.util.stream.IntStream;
+
+import static java.sql.Types.VARCHAR;
 
 /**
  * Created by igorg on 01.06.2024
@@ -95,11 +97,11 @@ public class UserServiceImpl implements UserService {
                                             d.getStrategy().getDriver(), d.getUrl(), d.getUser(), d.getPassword());
                             List<User> results = null;
                             final List<String> paramList = new ArrayList<>();
-                            // Caused by: org.postgresql.util.PSQLException: FATAL: sorry, too many clients already
                             try {
                                 final SqlBuilder builder = new SqlBuilder(sqlQuery, d, inputParams, paramList);
+                                final String sqlQuery = builder.build();
                                 results = paramList.isEmpty() ?
-                                        jdbcTemplate.query(builder.build(),
+                                        jdbcTemplate.query(sqlQuery,
                                                 (rs, rowNum) ->
                                                         new User(
                                                                 rs.getString(d.getMapping().getId()),
@@ -107,14 +109,22 @@ public class UserServiceImpl implements UserService {
                                                                 rs.getString(d.getMapping().getName()),
                                                                 rs.getString(d.getMapping().getSurname()))
                                         ) :
-                                        jdbcTemplate.query(builder.build(),
+                                        jdbcTemplate.query(sqlQuery,
+                                                preparedStatement -> IntStream.range(0, paramList.size())
+                                                        .forEach(idx -> {
+                                                            try {
+                                                                log.debug("PreparedStatementSetter: param: [{}]", paramList.get(idx));
+                                                                preparedStatement.setObject(idx+1, paramList.get(idx), VARCHAR);
+                                                            } catch (final SQLException e) {
+                                                                throw new RuntimeException(e);
+                                                            }
+                                                        }),
                                                 (rs, rowNum) ->
                                                         new User(
                                                                 rs.getString(d.getMapping().getId()),
                                                                 rs.getString(d.getMapping().getUsername()),
                                                                 rs.getString(d.getMapping().getName()),
-                                                                rs.getString(d.getMapping().getSurname())),
-                                                new Object[]{paramList.toArray()}
+                                                                rs.getString(d.getMapping().getSurname()))
                                         );
                             } catch (final Exception ex) {
                                 log.error("Strategy: %s, Url: [%s]".formatted(d.getStrategy(), d.getUrl()), ex);

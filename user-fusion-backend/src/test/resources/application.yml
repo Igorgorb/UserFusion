@@ -58,7 +58,7 @@ logging:
   level:
     - root: ERROR
 #    - org.springframework: INFO
-    - ua.igorg: DEBUG
+    - ua.igorg.userfusion: DEBUG
     - org.springframework.boot.test.context.SpringBootTestContextBootstrapper: WARN
 #    - org.springframework.test.context.support.AbstractContextLoader: WARN
 #    - org.springframework.test.context.support.AnnotationConfigContextLoaderUtils: WARN
