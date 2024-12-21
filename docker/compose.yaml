@@ -5,6 +5,7 @@ services:
   mysql:
     container_name: uf-mysql
     image: 'mysql:latest'
+    command: [ "--max_connections=1000" ]
     environment:
       - 'MYSQL_DATABASE=mydatabase'
       - 'MYSQL_PASSWORD=secret'
@@ -28,6 +29,7 @@ services:
   postgres:
     container_name: uf-postgres
     image: 'postgres:latest'
+    command: ["-c", "max_prepared_transactions=1000", "-c", "max_connections=3000"]
     environment:
       - 'POSTGRES_DB=mydatabase'
       - 'POSTGRES_PASSWORD=secret'

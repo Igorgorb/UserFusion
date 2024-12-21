@@ -178,7 +178,7 @@ RUN set -eux; \
 	cp -v /usr/share/postgresql/postgresql.conf.sample.dpkg /usr/share/postgresql/postgresql.conf.sample; \
 	ln -sv ../postgresql.conf.sample "/usr/share/postgresql/$PG_MAJOR/"; \
 	sed -ri "s!^#?(listen_addresses)\s*=\s*\S+.*!\1 = '*'!" /usr/share/postgresql/postgresql.conf.sample; \
-    sed -ri "s!^#?(max_prepared_transactions)\s*=.*!\1 = 110!" /usr/share/postgresql/postgresql.conf.sample; \
+    sed -ri "s!^#?(max_prepared_transactions)\s*=.*!\1 = 1100!" /usr/share/postgresql/postgresql.conf.sample; \
 	grep -F "listen_addresses = '*'" /usr/share/postgresql/postgresql.conf.sample
 
 RUN install --verbose --directory --owner postgres --group postgres --mode 3777 /var/run/postgresql
