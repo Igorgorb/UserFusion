@@ -71,7 +71,8 @@ dependencies {
     testImplementation "org.testcontainers:mysql:1.20.4"
     testImplementation "org.testcontainers:postgresql:1.20.4"
     testImplementation 'com.atlassian.oai:swagger-request-validator-mockmvc:2.44.1'
-
+    testCompileOnly 'org.projectlombok:lombok'
+    testAnnotationProcessor 'org.projectlombok:lombok'
 }
 
 dependencyManagement {
