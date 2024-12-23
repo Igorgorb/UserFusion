@@ -41,45 +41,6 @@ public class UserServiceImpl implements UserService {
             "select t.%s, t.%s, t.%s, t.%s from %s t where 1=1 ";
 
     @Override
-    public List<UserDto> getUsers() {
-        final List<UserDto> list = new ArrayList<>();
-        dataSourceProperties
-                .getDataSources()
-                .forEach(
-                        d -> {
-                            final var jdbcTemplate =
-                                    dataSourceSupplier.getJdbcTemplate(
-                                            d.getStrategy().getDriver(), d.getUrl(), d.getUser(), d.getPassword());
-                            List<User> results = null;
-                            try {
-                                results =
-                                        jdbcTemplate.query(
-                                                "select t.%s, t.%s, t.%s, t.%s from %s t"
-                                                        .formatted(
-                                                                d.getMapping().getId(),
-                                                                d.getMapping().getUsername(),
-                                                                d.getMapping().getName(),
-                                                                d.getMapping().getSurname(),
-                                                                d.getTable()),
-                                                (rs, rowNum) ->
-                                                        new User(
-                                                                rs.getString(d.getMapping().getId()),
-                                                                rs.getString(d.getMapping().getUsername()),
-                                                                rs.getString(d.getMapping().getName()),
-                                                                rs.getString(d.getMapping().getSurname())),
-                                                list);
-                            } catch (final Exception ex) {
-                                log.error("Strategy: %s, Url: [%s]".formatted(d.getStrategy(), d.getUrl()), ex);
-                            }
-                            if (Objects.nonNull(results)) {
-                                list.addAll(userMapper.toDto(results));
-                            }
-                        });
-        log.info("The result getUsers contains {} rows", list.size());
-        return Collections.unmodifiableList(list);
-    }
-
-    @Override
     public List<UserDto> getUsers(final Optional<String> username, final Optional<String> name, final Optional<String> surname) {
 
         final Map<FieldName, Optional<String>> inputParams =

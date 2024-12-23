@@ -23,12 +23,7 @@ public class UserResource implements UserResourceApi {
 
   @Override
   public ResponseEntity<List<UserDto>> getUsers(final Optional<String> username, final Optional<String> name, final Optional<String> surname) {
-    return ResponseEntity.ok(userService.getUsers(username, name, surname));
-  }
-
-  //  @Override
-  public ResponseEntity<List<UserDto>> getUsers() {
     log.debug("Received GET request to get users list, request URI:[{}]", getFullRequestUri());
-    return ResponseEntity.ok(userService.getUsers());
+    return ResponseEntity.ok(userService.getUsers(username, name, surname));
   }
 }
