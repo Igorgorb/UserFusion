@@ -182,5 +182,5 @@ For this run option, logging occurs at:
 - [x] Write ReadMe
 - [x] Addressed code review comments from the Team Lead.
 - [x] Add integration tests for reading from multiple sources using Testcontainer
-- [ ] Add logic for filtering data on request
+- [x] Add logic for filtering data on request
 - [ ] Add pagination for displaying results
